@@ -25,12 +25,14 @@ fname_out = sprintf('%s/domain_%s_%s.nc',out_netcdf_dir,clm_usrdat_name,datestr(
 disp(['  domain: ' fname_out])
 
 % Check if the file is available
-[s,~]=system(['ls ' clm_gridded_domain_filename]);
+%[s,~]=system(['ls ' clm_gridded_domain_filename]);
 
-if (s ~= 0)
-   error(['File not found: ' clm_gridded_domain_filename]);
+%if (s ~= 0)
+%   error(['File not found: ' clm_gridded_domain_filename]);
+%end
+if (exist(clm_gridded_domain_filename, 'file') ~= 2)
+    error(['File not found: ' clm_gridded_domain_filename]);
 end
-
 ncid_inp = netcdf.open(clm_gridded_domain_filename,'NC_NOWRITE');
 ncid_out = netcdf.create(fname_out,'NC_CLOBBER');
 
